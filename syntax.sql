@@ -35,7 +35,7 @@ select * from cd.facilities where facid in(
 
 --List of facilities with new column cost that says its 'cheap' if the cost is <= 100 and expensive if not
 --case acts as an if-else or switch statement from other languages.
--- end as adds the cost column to the table.
+-- The as labels the column with 'cost' on the table.
 select name,
 	case when (monthlymaintenance > 100) then
 		'expensive'
@@ -43,3 +43,6 @@ select name,
 		'cheap'
 	end as cost
 	from cd.facilities;
+
+  --Comparing the timestamps to filter data on a table. Timestamps compare as regular values.
+  select memid,surname,firstname,joindate from cd.members where joindate>='2012-09-01';
