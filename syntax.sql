@@ -19,3 +19,27 @@ select facid,name, membercost, monthlymaintenance from cd.facilities
 select * from cd.facilities where (position('Tennis' in name)>0);
 --or (with like)
 select * from cd. facilities where name like '%Tennis%' --like operator provides simple string pattert matching
+
+--select elements that are a second room for list. In this case that in their name have the number 2
+--the in operator takes a list of possible values that are compared to the values of the colum we want to quert
+--> Power of relational databases
+select * from cd.facilities where facid in(1,5);
+--or
+select * from cd.facilities where name like '%2%';
+
+--subquery from the information in one column filtered from the information in another table
+--Here we select the rows in cd.facilities where the facid is included in the cd.bookings table-->Filter
+select * from cd.facilities where facid in(
+  	select facid from cd.bookings
+  );
+
+--List of facilities with new column cost that says its 'cheap' if the cost is <= 100 and expensive if not
+--case acts as an if-else or switch statement from other languages.
+-- end as adds the cost column to the table.
+select name,
+	case when (monthlymaintenance > 100) then
+		'expensive'
+	else
+		'cheap'
+	end as cost
+	from cd.facilities;
